@@ -1,0 +1,22 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tablaproductores.css' %}">
+</head>
+
+<br>
+<form method="POST">
+    {% csrf_token %}
+
+    <h3>¿Desea eliminar el vivero {{ object }}?</h3>
+    <button class="btn btn-primary" type="submit" style="width: 110px; margin-left: 44%; font-size: 20px; color: black; ">Si</button>
+    <a class="btn btn-primary" style="width: 110px; margin-left: 0%; font-size: 20px; color: black;" href="{% url 'vivero:listar_vivero' %}">No</a>
+
+</form>
+<br>
+
+
+{% endblock %}

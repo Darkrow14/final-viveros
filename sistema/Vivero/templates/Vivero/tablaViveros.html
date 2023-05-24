@@ -1,0 +1,49 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Registros Viveros</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tablaproductores.css' %}">
+
+
+</head>
+<!--Creacion listado de Usuarios -->
+<!-- <h1 style="color: white; text-align: center; height: 0px;">Lista Productores</h1>-->
+<br>
+
+<!--Al trabajar con vistas basadas en clases ya no retorna un diccionario si no que retorna una lista de objetos-->
+
+{% if object_list %}
+<table>
+    
+    <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre Vivero</th>
+            <th>Propietario</th>
+            <th>Departamento</th>
+            <th>Municipio</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for vivero in object_list %}
+        <tr>
+            <td>{{ vivero.codigo }}</td>
+            <td>{{ vivero.nombre_vivero }}</td>
+            <td>{{ vivero.productor }}</td>
+            <td>{{ vivero.departamento }}</td>
+            <td>{{ vivero.municipio }}</td>
+            
+            <td><a class="btn btn-primary" href="{% url 'vivero:editar_vivero' vivero.id %}" style="color: black;">Editar</a>  <a class="btn btn-primary" href="{% url 'vivero:eliminar_vivero' vivero.id %}" style="color: black;">Eliminar</a></td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+{% endif %}
+{% endblock %}
