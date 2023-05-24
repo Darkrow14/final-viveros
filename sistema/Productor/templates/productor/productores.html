@@ -1,0 +1,74 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Productores</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/productores.css' %}">
+    
+    <script type="text/javascript">
+    function ConfirmarRegistro(){
+        alert("Registro exitoso")
+    }
+    </script>
+
+</head>
+
+<br>
+
+
+
+
+<form class="form-horizontal" method="POST">
+    <h4>Registro Productores</h4>
+
+
+    {% csrf_token%}
+    <div class="row form-group">
+        
+        <label for="{{ form.numero_documento.id_for_label }}"   
+                class="controls"> {{form.numero_documento.label_tag}} <br> {{ form.numero_documento }}</label>
+        
+    </div>
+
+    <div class="row form-group">
+        <label for="{{ form.nombre.id_for_label }}" 
+                class="controls"> {{ form.nombre.label_tag }} <br> {{ form.nombre }}</label>
+    </div>
+
+    <div class="row form-group">
+        <label for="{{ form.apellido.id_for_label }}" 
+                class="controls"> {{ form.apellido.label_tag }} <br> {{ form.apellido }}</label>
+    </div>
+
+    <div class="row form-group">
+        <label for="{{ form.direccion.id_for_label }}" 
+                class="controls"> {{ form.direccion.label_tag }} <br> {{ form.direccion }}</label>
+        
+    </div>
+
+    <div class="row form-group">
+        <label for="{{ form.email.id_for_label }}" 
+                class="controls"> {{ form.email.label_tag }} <br> {{ form.email }}</label>
+        
+    </div>
+
+    <div class="row form-group">
+        <label for="{{ form.telefono.id_for_label }}" 
+                class="controls"> {{ form.telefono.label_tag }} <br> {{ form.telefono }}</label>
+            
+    </div>
+
+      
+    <button class="btn btn-primary" type="submit" style="width: 120px; margin-left: 0%; font-size: 20px; color: black;" onclick="ConfirmarRegistro()">Guardar</button>
+
+    <a class="button" href="{% url 'listarproductor' %}" style="color: khaki; padding: 0px; margin-left: 30%; font-size: 20px;">Ver registros</a>
+ 
+</form>
+
+<br>
+
+
+
+
+{% endblock %}

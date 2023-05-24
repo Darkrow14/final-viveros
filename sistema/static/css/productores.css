@@ -1,0 +1,45 @@
+h2 {
+    background:  burlywood;
+    color: black;
+    height: 50px;
+    padding-left: 0%;
+    text-align: center;
+}
+
+form label {
+    text-align: left;
+}
+
+form {
+    width: 650px;
+    background: #24303c;
+    padding: 30px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 4px;
+    font-family: 'calibri';
+    color: white;
+    font-size: 20px;
+    padding-left: 5%;
+
+}
+
+.controls {
+    width: 100%;
+    background: #24303c;
+    padding: 3px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    padding-right: 10%;
+    font-family: 'calibri';
+    font-size: 18px;
+}
+
+form h4{
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align:center;
+    padding-right: 10%;
+}
+

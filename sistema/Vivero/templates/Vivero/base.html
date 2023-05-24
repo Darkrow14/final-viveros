@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/business-casual.min.css' %}" rel="stylesheet">
+
+  <!--Implementacion Plugin Select2-->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+</head>
+
+<body>
+
+  <h1 class="site-heading text-center text-white d-none d-lg-block">
+    <span class="site-heading-lower"><strong>Andres</strong></span>
+  </h1>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="{% url 'Inicio' %}">Andres</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item active px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'Inicio' %}">Inicio
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'Productor' %}">Productores</a>
+          </li>
+          <li class="nav-item px-lg-4">
+            <a class="nav-link text-uppercase text-expanded" href="{% url 'vivero:registro_vivero' %}">Registro Viveros</a>
+          </li>
+         
+
+          {% if request.user.is_staff %}
+          <li class="menu-item-has-children dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="position: absolute; top: 17px; left: 30px; font-size: 14px; color: #fff; line-height: 50%;" href=""><strong>USUARIOS</strong></a>
+            <ul class="sub-menu children dropdown-menu" style="position: absolute; top: 30px; left: 30px; background-color: rgba(27, 10, 4, 0.65)">
+              <li><i class="fa fa-table"></i><a style="color: #fff;" href="{% url 'usuario:listar_usuario' %}">Lista de usuarios</a></li>
+              <li><i class="fa fa-table"></i><a style="color: #fff;" href="{% url 'usuario:registrar_usuario' %}">Registro de usuarios</a></li>
+            </ul>
+          </li>
+          {% endif %}
+
+          <li class="menu-item-has-children dropdown" style="padding-left: 4%;">
+            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding-left: 4%; font-size: 14px; color: #fff; position: absolute; top: 10px; left: 180px;" href=""><strong> INICIO SESION</strong></a>
+
+            <ul class="sub-menu children dropdown-menu" style=" position: absolute; top: 30px; left: 180px; background-color: rgba(27, 10, 4, 0.65) ">
+              <li><a style="color: #fff; " href="#">Perfil</a></li>
+              <li><a style="color: #fff; " href="#"></a></li>
+              <li><a style="color: #fff; " href="{% url 'logout' %}"><i class="fa fa-power -off"></i>Cerrar sesion</a></li>
+            </ul> 
+          </li>
+              
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+    <!-- Contenido Cambiante-->
+    {% block content %}
+
+
+
+    {% endblock %}
+
+  <footer class="footer text-faded text-center py-5">
+    <div class="container">
+      <p class="m-0 small">Copyright &copy;2021</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  {% block extrajs %}
+  {% endblock extrajs %}
+
+</body>
+
+</html>

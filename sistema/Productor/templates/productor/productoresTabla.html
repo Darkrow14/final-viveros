@@ -1,0 +1,48 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Registros Productores</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tablaproductores.css' %}">
+
+
+</head>
+<!--Creacion listado de Productores -->
+<!-- <h1 style="color: white; text-align: center; height: 0px;">Lista Productores</h1>-->
+<br>
+<br>
+
+<table>
+    
+    <thead>
+        <tr>
+            <th>Cedula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Dirección</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Opción</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for productor in productores %}
+        <tr>
+            <td>{{ productor.numero_documento }}</td>
+            <td>{{ productor.nombre }}</td>
+            <td>{{ productor.apellido }}</td>
+            <td>{{ productor.direccion }}</td>
+            <td>{{ productor.email }}</td>
+            <td>{{ productor.telefono }}</td>
+            <td><a class="btn btn-primary" href="{% url 'editarproductor' productor.id %}" style="color: black;">Editar</a>  <a class="btn btn-primary" href="{% url 'eliminarproductor' productor.id %}" style="color: black;">Eliminar</a></td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+
+{% endblock %}
