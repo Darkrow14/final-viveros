@@ -13,8 +13,8 @@
         {% csrf_token %}
 
         <h3>¿Desea eliminar el productor {{ productor.nombre }} {{ productor.apellido }}?</h3>
-        <button class="btn btn-primary" type="submit" style="width: 110px; margin-left: 44%; font-size: 20px; color: black; ">Si</button>
-        <a class="btn btn-primary" style="width: 110px; margin-left: 0%; font-size: 20px; color: black;" href="{% url 'listarproductor' %}">No</a>
+        <button class="btn btn-success" type="submit" style="width: 110px; margin-left: 44%; font-size: 20px; ">Si</button>
+        <a class="btn btn-danger" style="width: 110px; margin-left: 0%; font-size: 20px;" href="{% url 'listarproductor' %}">No</a>
 
     </form>
     <br>
