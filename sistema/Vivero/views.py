@@ -5,12 +5,14 @@ from django.views.generic import CreateView, TemplateView, ListView, UpdateView,
 from .models import Vivero
 from .forms import DepartamentoMunicipioVivero, FormularioVivero, FormularioMunicipio, FormularioDepartamento
 
-
+#from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 #def vivero(request):
 #    return render(request, "vivero/viveroFormulario.html")
 
+#@permission_required('is_superuser')
 class ViveroCreateView(CreateView):
     model = Vivero
     form_class = FormularioVivero
@@ -90,14 +92,14 @@ class ListarVivero(ListView):
     model = Vivero
     template_name = "vivero/tablaViveros.html"
 
-
+#@permission_required('is_superuser')
 class EditarVivero(UpdateView):
     model = Vivero
     template_name = "vivero/viveroFormulario.html"
     form_class = FormularioVivero
     success_url = reverse_lazy('vivero:listar_vivero')
 
-
+#@permission_required('is_superuser')
 class EliminarVivero(DeleteView):
     model = Vivero
     success_url = reverse_lazy('vivero:listar_vivero')

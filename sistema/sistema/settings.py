@@ -26,6 +26,9 @@ DB_PASSWORD=env('DB_PASSWORD')
 DB_HOST=env('DB_HOST')
 DB_PORT=env('DB_PORT')
 
+STATICFILES_DIRS= (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

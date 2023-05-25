@@ -1,5 +1,6 @@
 from django.db import models
 
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Productor(models.Model):
@@ -21,4 +22,5 @@ class Productor(models.Model):
         verbose_name = "productor"
         verbose_name_plural = "productores"
 
-    
+
+

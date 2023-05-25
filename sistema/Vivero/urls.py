@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 from .views import ViveroCreateView, ListarVivero, EditarVivero, EliminarVivero
 
+from django.contrib.auth.decorators import permission_required
+
 urlpatterns = [
     #path('', login_required(views.inicio), name="Inicio"),
     path('', login_required(ViveroCreateView.as_view()), name="registro_vivero"),
@@ -14,3 +16,5 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+

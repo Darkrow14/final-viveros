@@ -7,11 +7,14 @@ from Productor.models import Productor
 from django.views.generic.edit import CreateView
 from django.contrib import messages
 
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+#@permission_required('is_superuser')
+@login_required
 def productor(request):
     if request.method == 'POST':
         form = FormularioProductor(request.POST)
-        if form.is_valid():
+        if form.is_valid() and request.user.is_staff:
             #messages.success(request, 'Productor guardado')
             form.save()
         return redirect('Productor')
