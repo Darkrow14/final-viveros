@@ -1,0 +1,22 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/tablaproductores.css' %}">
+</head>
+
+<br>
+<form method="POST">
+    {% csrf_token %}
+
+    <h3>¿Desea eliminar el usuario {{ object }}?</h3>
+    <button class="btn btn-success" type="submit" style="width: 110px; margin-left: 44%; font-size: 20px;  ">Si</button>
+    <a class="btn btn-danger" style="width: 110px; margin-left: 0%; font-size: 20px;" href="{% url 'usuario:listar_usuario' %}">No</a>
+
+</form>
+<br>
+
+
+{% endblock %}

@@ -8,7 +8,9 @@ urlpatterns = [
     path('', login_required(views.productor), name="Productor"),
     path('listarproductor', login_required(views.productor_list), name ="listarproductor"),
     path('editarproductor/<int:id>/', login_required(views.editar_productor), name ="editarproductor"),
-    path('eliminarproductor/<int:id>/', login_required(views.eliminar_productor), name ="eliminarproductor")
+    path('eliminarproductor/<int:id>/', login_required(views.eliminar_productor), name ="eliminarproductor"),
+    path('descargarexcel', login_required(views.exportar_excel), name ="exportarexcel"),
+    path('descargarpdf', login_required(views.exportar_pdf), name ="exportarpdf"),
     
 ]
 

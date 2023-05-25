@@ -59,10 +59,17 @@
             
     </div>
 
-      
-    <button class="btn btn-primary" type="submit" style="width: 120px; margin-left: 0%; font-size: 20px; color: black;" onclick="ConfirmarRegistro()">Guardar</button>
+    
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <button class="btn btn-lg btn-success" type="submit" onclick="ConfirmarRegistro()">Guardar</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <a class="button" href="{% url 'listarproductor' %}" style="color: khaki; padding: 0px; margin-left: 30%; font-size: 20px;">Ver registros</a>
+        </div>
+        
+    </div>
 
-    <a class="button" href="{% url 'listarproductor' %}" style="color: khaki; padding: 0px; margin-left: 30%; font-size: 20px;">Ver registros</a>
  
 </form>
 
