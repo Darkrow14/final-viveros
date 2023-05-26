@@ -1,0 +1,61 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Viveros</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/productores.css' %}">
+
+
+</head>
+
+<form class="form-horizontal" method="POST">
+    <h4>Registro de Viveros</h4>
+
+    {% csrf_token%}
+
+
+    {{ form.as_p }}
+
+    <script>
+        $(function(){
+            $('.select2').select2({
+
+            });
+
+        });
+    </script>
+
+    <!--{{ form.codigo.label }}
+    {{ form.codigo }}
+
+    {{ form.nombre_vivero.label }}
+    {{ form.nombre_vivero }}
+
+    {{ form.productor.label }}
+    {{ form.productor }}
+
+    {{ form.departamento.label }}
+    {{ form.departamento }}
+
+
+    {{ form.municipio.label }}
+    {% if form.departamento.id == form.municipio.departamento_id %}
+     {{ form.municipio }}
+    {% endif %}
+    -->  
+
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <button class="btn btn-lg btn-success" type="submit">Registrar</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{% url 'vivero:listar_vivero' %}" class="button" style="width: 120px; margin-left: 10%; font-size: 18px; color: khaki;">Ver registros viveros</a>
+        </div>
+        
+    </div>    
+</form>
+<br>
+
+
+{% endblock %}

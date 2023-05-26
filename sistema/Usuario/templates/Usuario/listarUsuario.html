@@ -1,0 +1,53 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Registros Usuarios</title>
+
+
+</head>
+<!--Creacion listado de Usuarios -->
+<!-- <h1 style="color: white; text-align: center; height: 0px;">Lista Productores</h1>-->
+<br>
+
+<!--Al trabajar con vistas basadas en clases ya no retorna un diccionario si no que retorna una lista de objetos-->
+
+{% if object_list %}
+<div class="table-responsive">
+    <table class="table table-dark table-hoverd">
+        
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Correo electronico</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in object_list %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.email }}</td>
+                <td>{{ usuario.nombres }}</td>
+                <td>{{ usuario.apellidos }}</td>
+                
+                <td class="text-center">
+                    <a class="btn btn-warning" href="{% url 'usuario:actualizar_usuario' usuario.id %}" tooltip title="Editar"> <i class="fa-solid fa-pencil"></i></a>  
+                    <a class="btn btn-danger" href="{% url 'usuario:eliminar_usuario' usuario.id %}" tooltip title="Eliminar"><i class="fa-solid fa-trash"></i></a>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<br>
+
+{% endif %}
+{% endblock %}

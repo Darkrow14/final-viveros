@@ -1,0 +1,67 @@
+{% extends "vivero/base.html"%}
+{% load static %}
+{% block content %}
+
+<head>
+    <title>Registros Productores</title>
+    
+</head>
+
+<div class="text-left">
+    <div class="dropdown">
+        <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">
+            <i class="fa-solid fa-download"></i> Descargar
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{% url 'exportarexcel' %}">
+                    <i class="fa-solid fa-file-excel">
+                    </i>
+                    Excel
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{% url 'exportarpdf' %}">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    Pdf
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-dark table-hoverd">
+        <thead>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Dirección</th>
+                <th>Email</th>
+                <th>Telefono</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for productor in productores %}
+            <tr>
+                <td>{{ productor.numero_documento }}</td>
+                <td>{{ productor.nombre }}</td>
+                <td>{{ productor.apellido }}</td>
+                <td>{{ productor.direccion }}</td>
+                <td>{{ productor.email }}</td>
+                <td>{{ productor.telefono }}</td>
+                <td class="text-center">
+                    <a class="btn btn-warning" href="{% url 'editarproductor' productor.id %}" tooltip title="Editar"> <i class="fa-solid fa-pencil"></i></a>  
+                    <a class="btn btn-danger" href="{% url 'eliminarproductor' productor.id %}" tooltip title="Eliminar"><i class="fa-solid fa-trash"></i></a>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+
+
+{% endblock %}
