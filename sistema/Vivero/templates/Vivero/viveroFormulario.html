@@ -45,12 +45,15 @@
     {% endif %}
     -->  
 
-    <div class="">
-        <button class="btn btn-primary" type="submit" style="width: 120px; margin-left: 0%; font-size: 18px; color: black;">Registrar</button>
-        <a href="{% url 'vivero:listar_vivero' %}" class="button" style="width: 120px; margin-left: 10%; font-size: 18px; color: khaki;">Ver registros viveros</a>
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <button class="btn btn-lg btn-success" type="submit">Registrar</button>
+        </div>
+        <div class="col-md-6 text-right">
+            <a href="{% url 'vivero:listar_vivero' %}" class="button" style="width: 120px; margin-left: 10%; font-size: 18px; color: khaki;">Ver registros viveros</a>
+        </div>
         
-    </div>
-    
+    </div>    
 </form>
 <br>
 

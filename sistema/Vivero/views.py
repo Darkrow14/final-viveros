@@ -1,9 +1,12 @@
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import CreateView, TemplateView, ListView, UpdateView, DeleteView
 from .models import Vivero
 from .forms import DepartamentoMunicipioVivero, FormularioVivero, FormularioMunicipio, FormularioDepartamento
+import openpyxl
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 #from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
@@ -90,7 +93,7 @@ class SuccessView(TemplateView):
 
 class ListarVivero(ListView):
     model = Vivero
-    template_name = "vivero/tablaViveros.html"
+    template_name = "vivero/tablaViveros.html"                                                                          
 
 #@permission_required('is_superuser')
 class EditarVivero(UpdateView):
@@ -104,8 +107,81 @@ class EliminarVivero(DeleteView):
     model = Vivero
     success_url = reverse_lazy('vivero:listar_vivero')
 
+def exportar_viveros_excel(request):
+    # Obtener todos los registros de Vivero
+    viveros = Vivero.objects.all()
 
+    # Crear un libro de Excel y una hoja de cálculo
+    libro_excel = openpyxl.Workbook()
+    hoja_excel = libro_excel.active
 
+    # Escribir encabezados de columna en la hoja de cálculo
+    hoja_excel['A1'] = 'ID'
+    hoja_excel['B1'] = 'Productor'
+    hoja_excel['C1'] = 'Departamento'
+    hoja_excel['D1'] = 'Municipio'
+    hoja_excel['E1'] = 'Código'
+    hoja_excel['F1'] = 'Nombre del Vivero'
+
+    # Escribir datos de los viveros en la hoja de cálculo
+    for index, vivero in enumerate(viveros, start=2):
+        hoja_excel.cell(row=index, column=1).value = vivero.id
+        hoja_excel.cell(row=index, column=2).value = vivero.productor.nombre
+        hoja_excel.cell(row=index, column=3).value = vivero.departamento
+        hoja_excel.cell(row=index, column=4).value = vivero.municipio
+        hoja_excel.cell(row=index, column=5).value = vivero.codigo
+        hoja_excel.cell(row=index, column=6).value = vivero.nombre_vivero
+
+    # Configurar la respuesta HTTP para descargar el archivo Excel
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=viveros.xlsx'
+
+    # Guardar el libro de Excel en la respuesta HTTP
+    libro_excel.save(response)
+
+    return response
+
+def exportar_viveros_pdf(request):
+    # Obtener todos los registros de Vivero
+    viveros = Vivero.objects.all()
+
+    # Crear un archivo PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename=viveros.pdf'
+
+    # Crear el objeto Canvas del archivo PDF
+    pdf = canvas.Canvas(response, pagesize=letter)
+
+    # Definir las posiciones de las columnas
+    columnas = [
+        (40, 'ID'),
+        (100, 'Productor'),
+        (200, 'Departamento'),
+        (300, 'Municipio'),
+        (400, 'Código'),
+        (500, 'Nombre del Vivero')
+    ]
+
+    # Escribir encabezados de columna en el archivo PDF
+    for x, columna in columnas:
+        pdf.drawString(x, 750, columna)
+
+    # Escribir datos de los viveros en el archivo PDF
+    y = 730  # Posición inicial de las filas
+    for vivero in viveros:
+        pdf.drawString(40, y, str(vivero.id))
+        pdf.drawString(100, y, vivero.productor.nombre)
+        pdf.drawString(200, y, vivero.departamento)
+        pdf.drawString(300, y, vivero.municipio)
+        pdf.drawString(400, y, str(vivero.codigo))
+        pdf.drawString(500, y, vivero.nombre_vivero)
+        y -= 20  # Espacio entre filas
+
+    # Finalizar el archivo PDF
+    pdf.showPage()
+    pdf.save()
+
+    return response
 
 
 

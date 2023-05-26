@@ -4,45 +4,66 @@
 
 <head>
     <title>Registros Viveros</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/tablaproductores.css' %}">
 
 
 </head>
-<!--Creacion listado de Usuarios -->
-<!-- <h1 style="color: white; text-align: center; height: 0px;">Lista Productores</h1>-->
 <br>
 
 <!--Al trabajar con vistas basadas en clases ya no retorna un diccionario si no que retorna una lista de objetos-->
 
 {% if object_list %}
-<table>
-    
-    <thead>
-        <tr>
-            <th>Codigo</th>
-            <th>Nombre Vivero</th>
-            <th>Propietario</th>
-            <th>Departamento</th>
-            <th>Municipio</th>
-            <th>Opciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for vivero in object_list %}
-        <tr>
-            <td>{{ vivero.codigo }}</td>
-            <td>{{ vivero.nombre_vivero }}</td>
-            <td>{{ vivero.productor }}</td>
-            <td>{{ vivero.departamento }}</td>
-            <td>{{ vivero.municipio }}</td>
-            
-            <td><a class="btn btn-primary" href="{% url 'vivero:editar_vivero' vivero.id %}" style="color: black;">Editar</a>  <a class="btn btn-primary" href="{% url 'vivero:eliminar_vivero' vivero.id %}" style="color: black;">Eliminar</a></td>
-            
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+<div class="text-left">
+    <div class="dropdown">
+        <a class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="">
+            <i class="fa-solid fa-download"></i> Descargar
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{% url 'exportarexcel' %}">
+                    <i class="fa-solid fa-file-excel">
+                    </i>
+                    Excel
+                </a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{% url 'exportarpdf' %}">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    Pdf
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-dark table-hoverd">
+            <tr>
+                <th>Codigo</th>
+                <th>Nombre Vivero</th>
+                <th>Propietario</th>
+                <th>Departamento</th>
+                <th>Municipio</th>
+                <th class="text-center">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vivero in object_list %}
+            <tr>
+                <td>{{ vivero.codigo }}</td>
+                <td>{{ vivero.nombre_vivero }}</td>
+                <td>{{ vivero.productor }}</td>
+                <td>{{ vivero.departamento }}</td>
+                <td>{{ vivero.municipio }}</td>
+                
+                <td class="text-center">
+                    <a class="btn btn-warning" href="{% url 'vivero:editar_vivero' vivero.id %}" tooltip title="Editar"> <i class="fa-solid fa-pencil"></i></a>  
+                    <a class="btn btn-danger" href="{% url 'vivero:eliminar_vivero' vivero.id %}" tooltip title="Eliminar"><i class="fa-solid fa-trash"></i></a>
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 <br>
 
 {% endif %}

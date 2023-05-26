@@ -1,0 +1,9 @@
+.main--content--app{
+    padding: 20px 50px;
+    width: 100%;
+}
+
+.dropdown-menu.show{
+    background-color: #d3d2d2;
+    color: white;
+}
